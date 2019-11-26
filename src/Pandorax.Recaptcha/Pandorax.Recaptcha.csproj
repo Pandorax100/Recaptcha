@@ -2,6 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>Pandorax.Recaptcha</PackageId>
+    <Version>1.0.0-alpha1</Version>
+    <Authors>Liam</Authors>
+    <Product>Pandorax.Recaptcha</Product>
+    <Description>A recaptcha service for verifying google recaptcha requests</Description>
+    <PackageProjectUrl>https://github.com/Pandorax100/Recaptcha</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Pandorax100/Recaptcha</RepositoryUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageLicenseExpression>MIT-0</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
