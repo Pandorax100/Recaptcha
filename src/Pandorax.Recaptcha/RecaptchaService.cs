@@ -29,18 +29,16 @@ namespace Pandorax.Recaptcha
                 ["remoteip"] = ipAddress
             };
 
-            using (var content = new FormUrlEncodedContent(parameters))
-            using (var response = await _client.PostAsync(_verifyUrl, content))
+            using var content = new FormUrlEncodedContent(parameters);
+            using var response = await _client.PostAsync(_verifyUrl, content);
+            if (response.IsSuccessStatusCode)
             {
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = await response.Content.ReadAsStringAsync();
-                    var model = JsonConvert.DeserializeObject<ValidationResponse>(read);
-                    return model;
-                }
-
-                return new ValidationResponse { Success = false };
+                var read = await response.Content.ReadAsStringAsync();
+                var model = JsonConvert.DeserializeObject<ValidationResponse>(read);
+                return model;
             }
+
+            return new ValidationResponse { Success = false };
         }
     }
 }
