@@ -8,6 +8,12 @@ namespace Pandorax.Recaptcha
         [JsonProperty("success")]
         public bool Success { get; set; }
 
+        [JsonProperty("score")]
+        public decimal Score { get; set; }
+
+        [JsonProperty("action")]
+        public string Action { get; set; }
+
         [JsonProperty("challenge_ts")]
         public DateTimeOffset ChallengeTimeStamp { get; set; }
 
