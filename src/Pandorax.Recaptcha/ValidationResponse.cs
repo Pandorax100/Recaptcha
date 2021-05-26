@@ -1,26 +1,48 @@
 using System;
-using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Pandorax.Recaptcha
 {
-    public class ValidationResponse
+    /// <summary>
+    /// The reCAPTCHA validation response.
+    /// </summary>
+    public record ValidationResponse
     {
-        [JsonProperty("success")]
-        public bool Success { get; set; }
+        /// <summary>
+        /// Gets a value indicating whether this request was a valid reCAPTCHA token.
+        /// </summary>
+        [JsonPropertyName("success")]
+        public bool Success { get; init; }
 
-        [JsonProperty("score")]
-        public decimal Score { get; set; }
+        /// <summary>
+        /// Gets the score for this request (0.0 - 1.0).
+        /// </summary>
+        [JsonPropertyName("success")]
+        public double Score { get; init; }
 
-        [JsonProperty("action")]
-        public string Action { get; set; }
+        /// <summary>
+        /// Gets the action name for this request (important to verify).
+        /// </summary>
+        [JsonPropertyName("success")]
+        public string Action { get; init; }
 
-        [JsonProperty("challenge_ts")]
-        public DateTimeOffset ChallengeTimeStamp { get; set; }
+        /// <summary>
+        /// Gets timestamp of the challenge load (ISO format yyyy-MM-dd'T'HH:mm:ssZZ).
+        /// </summary>
+        [JsonPropertyName("success")]
+        public DateTimeOffset ChallengeTimeStamp { get; init; }
 
-        [JsonProperty("hostname")]
-        public string Hostname { get; set; }
+        /// <summary>
+        /// Gets the hostname of the site where the reCAPTCHA was solved.
+        /// </summary>
+        [JsonPropertyName("success")]
+        public string Hostname { get; init; }
 
-        [JsonProperty("error-codes")]
-        public string[] ErrorCodes { get; set; }
+        /// <summary>
+        /// Gets the list of error codes returned from the validation request.
+        /// </summary>
+        [JsonPropertyName("success")]
+        public List<string> ErrorCodes { get; private init; }
     }
 }
