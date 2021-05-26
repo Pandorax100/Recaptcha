@@ -18,31 +18,31 @@ namespace Pandorax.Recaptcha
         /// <summary>
         /// Gets the score for this request (0.0 - 1.0).
         /// </summary>
-        [JsonPropertyName("success")]
+        [JsonPropertyName("score")]
         public double Score { get; init; }
 
         /// <summary>
         /// Gets the action name for this request (important to verify).
         /// </summary>
-        [JsonPropertyName("success")]
+        [JsonPropertyName("action")]
         public string Action { get; init; }
 
         /// <summary>
         /// Gets timestamp of the challenge load (ISO format yyyy-MM-dd'T'HH:mm:ssZZ).
         /// </summary>
-        [JsonPropertyName("success")]
+        [JsonPropertyName("challenge_ts")]
         public DateTimeOffset ChallengeTimeStamp { get; init; }
 
         /// <summary>
         /// Gets the hostname of the site where the reCAPTCHA was solved.
         /// </summary>
-        [JsonPropertyName("success")]
+        [JsonPropertyName("hostname")]
         public string Hostname { get; init; }
 
         /// <summary>
         /// Gets the list of error codes returned from the validation request.
         /// </summary>
-        [JsonPropertyName("success")]
+        [JsonPropertyName("error-codes")]
         public List<string> ErrorCodes { get; private init; }
     }
 }
