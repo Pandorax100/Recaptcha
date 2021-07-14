@@ -10,9 +10,9 @@ namespace Pandorax.Recaptcha
         /// <summary>
         /// Validates the given reCAPTCHA form value against the server.
         /// </summary>
-        /// <param name="gRecaptchaResponse">The user response token provided by the reCAPTCHA.</param>
+        /// <param name="recaptchaResponse">The user response token provided by the reCAPTCHA.</param>
         /// <param name="ipAddress">The user's IP address.</param>
         /// <returns>The reCAPTCHA validation response.</returns>
-        Task<ValidationResponse> ValidateAsync(string gRecaptchaResponse, string ipAddress = null);
+        Task<ValidationResponse> ValidateAsync(string recaptchaResponse, string ipAddress = null);
     }
 }

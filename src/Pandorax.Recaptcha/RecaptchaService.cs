@@ -34,12 +34,12 @@ namespace Pandorax.Recaptcha
         }
 
         /// <inheritdoc />
-        public async Task<ValidationResponse> ValidateAsync(string gRecaptchaResponse, string ipAddress)
+        public async Task<ValidationResponse> ValidateAsync(string recaptchaResponse, string ipAddress)
         {
             var parameters = new Dictionary<string, string>
             {
                 ["secret"] = _secretKey,
-                ["response"] = gRecaptchaResponse,
+                ["response"] = recaptchaResponse,
                 ["remoteip"] = ipAddress,
             };
 
