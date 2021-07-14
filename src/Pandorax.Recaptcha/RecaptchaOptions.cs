@@ -20,6 +20,6 @@ namespace Pandorax.Recaptcha
         /// <summary>
         /// Gets the reCAPTCHA verify url.
         /// </summary>
-        public Uri RecaptchaVerifyUrl { get; } = new Uri(RecaptchaConstants.DefaultRecaptchaVerifyUrl);
+        internal Uri RecaptchaVerifyUrl { get; } = new Uri(RecaptchaConstants.DefaultRecaptchaVerifyUrl);
     }
 }

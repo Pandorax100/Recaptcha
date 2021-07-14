@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
+#if NET461
+using Newtonsoft.Json;
+#endif
 
 namespace Pandorax.Recaptcha
 {
@@ -45,8 +48,12 @@ namespace Pandorax.Recaptcha
 
             if (response.IsSuccessStatusCode)
             {
-                var read = await response.Content.ReadAsStringAsync();
-                var model = System.Text.Json.JsonSerializer.Deserialize<ValidationResponse>(read);
+                var responseString = await response.Content.ReadAsStringAsync();
+#if NET5_0
+                var model = System.Text.Json.JsonSerializer.Deserialize<ValidationResponse>(responseString);
+#elif NET461
+                var model = JsonConvert.DeserializeObject<ValidationResponse>(responseString);
+#endif
                 return model;
             }
 
