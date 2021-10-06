@@ -57,7 +57,7 @@ namespace Pandorax.Recaptcha
                 return model;
             }
 
-            return new ValidationResponse { Success = false };
+            return new ValidationResponse(success: false);
         }
     }
 }
