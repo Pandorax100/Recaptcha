@@ -1,10 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net5.0;net461</TargetFrameworks>
-    <LangVersion>latest</LangVersion>
+    <TargetFrameworks>net6.0</TargetFrameworks>
     <PackageId>Pandorax.Recaptcha</PackageId>
-    <Version>2.1.1</Version>
+    <Version>3.0.0-alpha001</Version>
     <Authors>Liam</Authors>
     <Product>Pandorax.Recaptcha</Product>
     <Description>A recaptcha service for verifying google recaptcha requests</Description>
@@ -22,27 +21,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.354">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup Condition="$(TargetFramework) == 'net5.0'">
-    <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="5.0.0" />
-  </ItemGroup>
-
-  <ItemGroup Condition="$(TargetFramework) == 'net461'">
-    <Compile Remove="ServiceCollectionExtensions.cs" />
-  </ItemGroup>
-
-  <ItemGroup Condition="$(TargetFramework) == 'net461'">
-    <PackageReference Include="Microsoft.Extensions.Options" Version="5.0.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-  </ItemGroup>
-
-  <ItemGroup Condition="$(TargetFramework) == 'net461'">
-    <Reference Include="System.Net.Http" />
   </ItemGroup>
 </Project>
