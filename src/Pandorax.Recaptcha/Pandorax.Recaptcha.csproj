@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>net6.0</TargetFrameworks>
     <PackageId>Pandorax.Recaptcha</PackageId>
-    <Version>3.0.0-alpha001</Version>
+    <Version>3.0.0-alpha002</Version>
     <Authors>Liam</Authors>
     <Product>Pandorax.Recaptcha</Product>
     <Description>A recaptcha service for verifying google recaptcha requests</Description>

@@ -8,7 +8,7 @@
 
   <PropertyGroup>
     <PackageId>Pandorax.Recaptcha.DependencyInjection</PackageId>
-    <Version>1.0.0-alpha001</Version>
+    <Version>1.0.0-alpha002</Version>
     <Authors>Liam</Authors>
     <Product>Pandorax.Recaptcha.DependencyInjection</Product>
     <Description>Pandorax.Recaptcha extensions for ASP.NET Core</Description>
