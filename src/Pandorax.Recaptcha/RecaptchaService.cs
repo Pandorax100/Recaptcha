@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Text.Json;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 
@@ -46,9 +46,8 @@ namespace Pandorax.Recaptcha
 
             if (response.IsSuccessStatusCode)
             {
-                var responseString = await response.Content.ReadAsStringAsync();
+                ValidationResponse model = await response.Content.ReadFromJsonAsync<ValidationResponse>();
 
-                var model = JsonSerializer.Deserialize<ValidationResponse>(responseString);
                 return model;
             }
 
