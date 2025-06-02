@@ -65,7 +65,7 @@ public class MyController : Controller
     [HttpPost]
     public async Task<IActionResult> SubmitForm(string recaptchaResponse)
     {
-        var validationResponse = await _recaptchaService.ValidateAsync(recaptchaResponse, HttpContext.Connection.RemoteIpAddress.ToString());
+        var validationResponse = await _recaptchaService.ValidateAsync(recaptchaResponse, HttpContext.Connection.RemoteIpAddress);
 
         if (validationResponse.Success)
         {
