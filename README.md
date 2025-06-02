@@ -8,7 +8,6 @@ To install the library, add the following NuGet package to your project:
 
 ```
 dotnet add package Pandorax.Recaptcha
-dotnet add package Pandorax.Recaptcha.DependencyInjection
 ```
 
 ## Usage
