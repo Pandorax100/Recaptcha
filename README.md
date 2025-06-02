@@ -44,6 +44,12 @@ builder.Services.AddRecaptcha(builder.Configuration.GetSection("Recaptcha"));
 
 ### Validation
 
+When validating a reCAPTCHA response, you should check the following properties on the validation response:
+
+- `Success`: Indicates whether the validation was successful.
+- `Score`: Represents the confidence score (for reCAPTCHA v3). You may want to set a threshold (e.g., 0.5).
+- `Action`: Should match the expected action you specified when rendering the reCAPTCHA widget.
+
 To validate a reCAPTCHA response, inject the `IRecaptchaService` into your controller or service and call the `ValidateAsync` method:
 
 ```csharp
@@ -67,6 +73,14 @@ public class MyController : Controller
             if (validationResponse.Score >= 0.5)
             {
                 // High confidence in the user's interaction
+                if (validationResponse.Action == "submit_form")
+                {
+                    // Action matches expected value
+                }
+                else
+                {
+                    // Action does not match expected value
+                }
             }
             else
             {
