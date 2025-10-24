@@ -38,8 +38,12 @@ namespace Pandorax.Recaptcha
             {
                 ["secret"] = _secretKey,
                 ["response"] = recaptchaResponse,
-                ["remoteip"] = ipAddress,
             };
+
+            if (!string.IsNullOrWhiteSpace(ipAddress))
+            {
+                parameters["remoteip"] = ipAddress;
+            }
 
             using var content = new FormUrlEncodedContent(parameters);
             using var response = await _client.PostAsync(_verifyUrl, content);
