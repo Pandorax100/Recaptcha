@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Pandorax.Recaptcha
 {
@@ -10,11 +11,13 @@ namespace Pandorax.Recaptcha
         /// <summary>
         /// Gets or sets the site key for this reCAPTCHA.
         /// </summary>
+        [Required(AllowEmptyStrings = false)]
         public string SiteKey { get; set; }
 
         /// <summary>
         /// Gets or sets the shared key between your site and reCAPTCHA.
         /// </summary>
+        [Required(AllowEmptyStrings = false)]
         public string SecretKey { get; set; }
 
         /// <summary>

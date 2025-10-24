@@ -1,6 +1,7 @@
 using System;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 namespace Pandorax.Recaptcha
 {
@@ -17,7 +18,13 @@ namespace Pandorax.Recaptcha
         /// <returns>The <see cref="IServiceCollection"/> so that additional calls can be chained.</returns>
         public static IServiceCollection AddRecaptcha(this IServiceCollection services, IConfiguration configurationSection)
         {
-            services.Configure<RecaptchaOptions>(configurationSection);
+            ArgumentNullException.ThrowIfNull(services);
+            ArgumentNullException.ThrowIfNull(configurationSection);
+
+            var builder = services.AddOptions<RecaptchaOptions>();
+            builder.Bind(configurationSection);
+            ConfigureValidation(builder);
+
             return AddCoreServices(services);
         }
 
@@ -29,7 +36,13 @@ namespace Pandorax.Recaptcha
         /// <returns>The <see cref="IServiceCollection"/> so that additional calls can be chained.</returns>
         public static IServiceCollection AddRecaptcha(this IServiceCollection services, Action<RecaptchaOptions> configureAction)
         {
-            services.Configure(configureAction);
+            ArgumentNullException.ThrowIfNull(services);
+            ArgumentNullException.ThrowIfNull(configureAction);
+
+            var builder = services.AddOptions<RecaptchaOptions>();
+            builder.Configure(configureAction);
+            ConfigureValidation(builder);
+
             return AddCoreServices(services);
         }
 
@@ -38,6 +51,12 @@ namespace Pandorax.Recaptcha
             services.AddHttpClient<IRecaptchaService, RecaptchaService>();
 
             return services;
+        }
+
+        private static void ConfigureValidation(OptionsBuilder<RecaptchaOptions> builder)
+        {
+            builder.Validate(options => !string.IsNullOrWhiteSpace(options.SecretKey), "Recaptcha SecretKey must be provided.");
+            builder.Validate(options => !string.IsNullOrWhiteSpace(options.SiteKey), "Recaptcha SiteKey must be provided.");
         }
     }
 }
