@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 
@@ -21,12 +22,10 @@ namespace Pandorax.Recaptcha
         /// <param name="options">The <see cref="IOptions{RecaptchaOptions}"/> used to configure the reCAPTCHA.</param>
         public RecaptchaService(HttpClient client, IOptions<RecaptchaOptions> options)
         {
-            if (options is null)
-            {
-                throw new ArgumentNullException(nameof(options));
-            }
+            ArgumentNullException.ThrowIfNull(options);
+            ArgumentNullException.ThrowIfNull(client);
 
-            _client = client ?? throw new ArgumentNullException(nameof(client));
+            _client = client;
             _secretKey = options.Value.SecretKey;
             _verifyUrl = options.Value.RecaptchaVerifyUrl;
         }
@@ -48,14 +47,33 @@ namespace Pandorax.Recaptcha
             using var content = new FormUrlEncodedContent(parameters);
             using var response = await _client.PostAsync(_verifyUrl, content);
 
-            if (response.IsSuccessStatusCode)
+            if (!response.IsSuccessStatusCode)
             {
-                ValidationResponse model = await response.Content.ReadFromJsonAsync<ValidationResponse>();
-
-                return model;
+                return new ValidationResponse
+                {
+                    ErrorCodes = new List<string> { $"http_status:{(int)response.StatusCode}" },
+                };
             }
 
-            return new ValidationResponse(success: false);
+            try
+            {
+                ValidationResponse model = await response.Content.ReadFromJsonAsync<ValidationResponse>();
+                return model ?? new ValidationResponse(success: false);
+            }
+            catch (NotSupportedException)
+            {
+                return new ValidationResponse
+                {
+                    ErrorCodes = new List<string> { "invalid_response:unsupported_content_type" },
+                };
+            }
+            catch (JsonException)
+            {
+                return new ValidationResponse
+                {
+                    ErrorCodes = new List<string> { "invalid_response:malformed_json" },
+                };
+            }
         }
     }
 }
