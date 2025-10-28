@@ -100,3 +100,23 @@ public class MyController : Controller
 ## License
 
 This project is licensed under the MIT License.
+
+## reCAPTCHA Enterprise
+
+For Google reCAPTCHA Enterprise assessments, install the companion package:
+
+```
+dotnet add package Pandorax.RecaptchaEnterprise
+```
+
+Configure the Enterprise options (project ID, default site key, and optional expected action) and register the service:
+
+```csharp
+builder.Services.AddRecaptchaEnterprise(options =>
+{
+    options.ProjectId = builder.Configuration["RecaptchaEnterprise:ProjectId"];
+    options.SiteKey = builder.Configuration["RecaptchaEnterprise:SiteKey"];
+});
+```
+
+The Enterprise service creates `CreateAssessment` requests using Google's `Google.Cloud.RecaptchaEnterprise.V1` client. Supply Google Cloud credentials (environment variable or workload identity) so the client can authenticate. The resulting `IRecaptchaEnterpriseService` returns both the risk score and token metadata, allowing you to enforce action matches and score thresholds.

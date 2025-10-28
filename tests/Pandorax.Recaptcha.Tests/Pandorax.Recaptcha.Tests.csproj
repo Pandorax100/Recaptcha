@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Pandorax.Recaptcha\Pandorax.Recaptcha.csproj" />
+    <ProjectReference Include="..\..\src\Pandorax.RecaptchaEnterprise\Pandorax.RecaptchaEnterprise.csproj" />
   </ItemGroup>
 
   <ItemGroup>
